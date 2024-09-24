@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Jedag Jedug with Typing Text</title>
+<style type="text/css" media="all">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    color: white;
+}
+
+.form-container {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.container {
+    
+    width: 200px;
+    aspect-ratio: 1/1; /* Ukuran ditambah agar teks ada di atas heart */
+    
+}
+
+.typing-text {
+    font-size: 200px;
+    color: white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid;
+    width: 0;
+    animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    animation: pulse 0.5s infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -75px; /* Menggeser lingkaran atas */
+    left: 0;
+}
+
+.heart::after {
+    left: 75px; /* Menggeser lingkaran samping */
+    top: 0;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+</style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="loveForm">
+            <h1>Enter Your Name</h1>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div class="container" id="heartContainer" style="display: none;">
+        <div class="typing-text" id="typingText"></div> <!-- Animasi teks di sini -->
+        <div class="heart"></div>
+    </div>
+
+    <audio id="jedagJedugAudio" src="your-audio-file.mp3" loop></audio>
+
+    <script>document.getElementById('loveForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Mencegah pengiriman form default
+    
+    const name = document.getElementById('name').value;
+    if (name) {
+        // Menyembunyikan form setelah diisi
+        document.querySelector('.form-container').style.display = 'none';
+        
+        // Menampilkan animasi love dan teks mengetik
+        const heartContainer = document.getElementById('heartContainer');
+        heartContainer.style.display = 'block';
+
+        // Memulai animasi teks mengetik
+        const typingText = document.getElementById('typingText');
+        typingText.innerHTML = `Hello, ${name}!`; // Menampilkan teks dengan nama
+        
+        // Memutar musik jedag-jedug
+        const audio = document.getElementById('jedagJedugAudio');
+        audio.play();
+    } else {
+        alert('Please enter your name!');
+    }
+});</script>
+</body>
+</html>
